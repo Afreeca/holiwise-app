@@ -1,8 +1,8 @@
 "use client";
 
 import Title from "@/components/Title";
+import Folder from "@/components/folder/Folder";
 import NewFolderModal from "@/components/folder/newFolderModal";
-import Folder from "@/components/folder/page";
 import { useGlobalContext } from "@/context/global";
 import { useState } from "react";
 
@@ -32,7 +32,7 @@ export default function Groups() {
         >
           New Group
         </button>
-        <div className="h-3/6 overflow-auto">
+        <div className="grid grid-flow-col auto-cols-max gap-2">
           {groups?.map((folder) => (
             <Folder
               key={folder.id}

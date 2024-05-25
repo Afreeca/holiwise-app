@@ -4,7 +4,7 @@ import ReactCardFlip from "react-card-flip";
 import CardBack from "./CardBack";
 import CardFront from "./CardFront";
 
-const Card = ({ location }) => {
+const Card = ({ location, onDragStart }) => {
   const { getFavourite, toggleFavourite } = useGlobalContext();
 
   const isFavourite = getFavourite(location.id);
@@ -16,7 +16,11 @@ const Card = ({ location }) => {
   };
 
   return (
-    <div className="h-[450px]">
+    <div
+      draggable
+      className="h-[450px]"
+      onDragStart={(e) => onDragStart(e, location)}
+    >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <CardFront
           location={location}
