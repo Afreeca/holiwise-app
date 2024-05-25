@@ -4,13 +4,10 @@ import DroppableArea from "@/components/DroppableArea";
 import Title from "@/components/Title";
 import Card from "@/components/card/card";
 import { useGlobalContext } from "@/context/global";
-import { useState } from "react";
 
 export default function Saved() {
-  const [widgets, setWidgets] = useState([]);
   const { savedLocation, groups, addGroupItem } = useGlobalContext();
 
-  console.log("groups: ", groups);
   const handleOnDrag = (e, data) => {
     console.log({ e, data });
     e.dataTransfer.setData("application/json", JSON.stringify(data));
@@ -30,15 +27,15 @@ export default function Saved() {
     <main className="flex flex-col h-screen">
       <Title text="Saved" />
       <div className="flex-1 overflow-auto">
-        <div className="App">
+        <div className="App flex flex-wrap">
           {groups.map((group, index) => (
-            <DroppableArea
-              key={index} // todo
-              title={group.name}
-              items={group?.items}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleOnDrop(e, group.id)}
-            />
+            <div key={index} className="w-auto p-4">
+              <DroppableArea
+                group={group}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleOnDrop(e, group.id)}
+              />
+            </div>
           ))}
         </div>
 
