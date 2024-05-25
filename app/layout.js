@@ -1,4 +1,5 @@
 import Sidebar from "@/components/sidebar";
+import { GlobalContextProvider } from "@/context/global";
 import { SidebarContextProvider } from "@/context/useSidebar";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -14,12 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} h-screen flex`}>
-        <SidebarContextProvider>
-          <Sidebar />
-          <div className="flex-grow p-4 transition-all duration-300">
-            {children}
-          </div>
-        </SidebarContextProvider>
+        <GlobalContextProvider>
+          <SidebarContextProvider>
+            <Sidebar />
+            <div className="flex-grow p-4 transition-all duration-300">
+              {children}
+            </div>
+          </SidebarContextProvider>
+        </GlobalContextProvider>
       </body>
     </html>
   );

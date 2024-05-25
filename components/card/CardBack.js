@@ -11,18 +11,10 @@ import {
   faUtensils,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 
-const Card = ({ location }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
-
+const CardBack = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
   const {
     name,
-    image,
     averageFlightCost,
     shortRent,
     foodPrice,
@@ -35,18 +27,19 @@ const Card = ({ location }) => {
     nature,
   } = location;
 
-  console.log("holidayType: ", holidayType);
   return (
-    <div className="relative flex flex-col text-black border border-gray-200 rounded-md overflow-hidden shadow-md mb-6">
-      <FontAwesomeIcon
-        icon={faHeart}
-        className={`absolute top-2 right-2 cursor-pointer ${
-          isFavorite ? "text-red-500" : "text-white"
-        }`}
-        onClick={toggleFavorite}
-      />
-      <div className="relative w-full h-48 overflow-hidden">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+    <div
+      className="relative flex flex-col text-black border border-gray-200 rounded-md overflow-hidden shadow-md mb-6"
+      key="back"
+    >
+      <div className="relative w-full">
+        <FontAwesomeIcon
+          icon={faHeart}
+          className={`absolute top-2 right-2 z-10 cursor-pointer ${
+            isFavourite ? "text-red-500" : "text-white"
+          }`}
+          onClick={() => toggleFavourite(location)}
+        />
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-2">{name}</h3>
@@ -85,8 +78,14 @@ const Card = ({ location }) => {
           <strong>Holiday Type:</strong> {holidayType}
         </p>
       </div>
+      <button
+        onClick={toggleFlip}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Hide Info
+      </button>
     </div>
   );
 };
 
-export default Card;
+export default CardBack;
