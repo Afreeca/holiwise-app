@@ -6,21 +6,21 @@ import { useState } from "react";
 import USERS from "../__mock__/users.json";
 
 const useGlobal = () => {
-  const [savedLocation, setSavedLocation] = useState([]);
+  const [savedLocations, setSavedLocations] = useState([]);
   const [users, _] = useState(USERS);
   const [groups, setGroups] = useState([]);
 
-  const setFavourite = (location) => {
+  const setSavedLocation = (location) => {
     const item = getLocationById(location.id);
     if (!item) {
-      setSavedLocation((prev) => [...prev, location]);
+      setSavedLocations((prev) => [...prev, location]);
     } else {
-      setSavedLocation((prev) => prev.filter((fav) => fav.id !== location.id));
+      setSavedLocations((prev) => prev.filter((fav) => fav.id !== location.id));
     }
   };
 
   const getLocationById = (id) => {
-    return savedLocation.some((location) => location.id === id);
+    return savedLocations.some((location) => location.id === id);
   };
 
   const addGroup = (groupName) => {
@@ -76,9 +76,9 @@ const useGlobal = () => {
 
   return {
     users,
-    savedLocation,
-    toggleFavourite: setFavourite,
-    getFavourite: getLocationById,
+    savedLocations,
+    toggleSavedLocation: setSavedLocation,
+    getSavedLocation: getLocationById,
     groups,
     addGroup,
     renameGroup,

@@ -12,7 +12,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CardBack = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
+const CardBack = ({
+  location,
+  toggleFlip,
+  isSavedLocation,
+  toggleSavedLocation,
+}) => {
   const {
     name,
     averageFlightCost,
@@ -36,9 +41,9 @@ const CardBack = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
         <FontAwesomeIcon
           icon={faHeart}
           className={`absolute top-2 right-2 z-10 cursor-pointer ${
-            isFavourite ? "text-red-500" : "text-white"
+            isSavedLocation ? "text-red-500" : "text-white"
           }`}
-          onClick={() => toggleFavourite(location)}
+          onClick={() => toggleSavedLocation(location)}
         />
       </div>
       <div className="p-4">

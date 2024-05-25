@@ -5,9 +5,9 @@ import CardBack from "./CardBack";
 import CardFront from "./CardFront";
 
 const Card = ({ location, onDragStart }) => {
-  const { getFavourite, toggleFavourite } = useGlobalContext();
+  const { getSavedLocation, toggleSavedLocation } = useGlobalContext();
 
-  const isFavourite = getFavourite(location.id);
+  const isSavedLocation = getSavedLocation(location.id);
 
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -25,14 +25,14 @@ const Card = ({ location, onDragStart }) => {
         <CardFront
           location={location}
           toggleFlip={toggleFlip}
-          isFavourite={isFavourite}
-          toggleFavourite={toggleFavourite}
+          isSavedLocation={isSavedLocation}
+          toggleSavedLocation={toggleSavedLocation}
         />
         <CardBack
           location={location}
           toggleFlip={toggleFlip}
-          isFavourite={isFavourite}
-          toggleFavourite={toggleFavourite}
+          isSavedLocation={isSavedLocation}
+          toggleSavedLocation={toggleSavedLocation}
         />
       </ReactCardFlip>
     </div>

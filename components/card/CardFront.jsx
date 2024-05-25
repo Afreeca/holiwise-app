@@ -1,17 +1,17 @@
-import {
-  faHeart,
-  faStar,
-  faTree,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faStar, faTree } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const CardFront = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
+const CardFront = ({
+  location,
+  toggleFlip,
+  isSavedLocation,
+  toggleSavedLocation,
+}) => {
   const { name, image, popularity, review, holidayType, nature } = location;
 
   return (
     <div
-      className="relative flex flex-col justify-between  border border-gray-200 rounded-md overflow-hidden shadow-md h-[430px]"
+      className="relative flex flex-col justify-between  border border-gray-200 rounded-md overflow-hidden shadow-md h-[410px]"
       key="front"
     >
       <div className=" flex flex-col">
@@ -20,9 +20,9 @@ const CardFront = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
           <FontAwesomeIcon
             icon={faHeart}
             className={`absolute top-2 right-2 z-10 cursor-pointer ${
-              isFavourite ? "text-red-500" : "text-white"
+              isSavedLocation ? "text-red-500" : "text-white"
             }`}
-            onClick={() => toggleFavourite(location)}
+            onClick={() => toggleSavedLocation(location)}
           />
         </div>
         <div className="px-4 py-2">
@@ -30,9 +30,6 @@ const CardFront = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
           <ul className="text-sm">
             <li className="flex items-center mb-1">
               <FontAwesomeIcon icon={faStar} className="mr-1" /> {popularity}
-            </li>
-            <li className="flex items-center mb-1">
-              <FontAwesomeIcon icon={faUsers} className="mr-1" /> {review}
             </li>
             <li className="flex items-center mb-1">
               <FontAwesomeIcon icon={faTree} className="mr-1" /> {nature}
