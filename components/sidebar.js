@@ -1,11 +1,7 @@
 "use client";
 
 import { useSidebarContext } from "@/context/useSidebar";
-import {
-  faBookmark,
-  faHome,
-  faPlaneDeparture,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,14 +29,12 @@ export default function Sidebar() {
           width="74"
           height="74"
         />
-        <button className="text-black" onClick={toggle}>
-          {isOpen ? "<" : ">"}
-        </button>
+        <button onClick={toggle}>{isOpen ? "<" : ">"}</button>
       </div>
       <nav className="flex flex-col p-4 space-y-4">
         <Link
           href="/"
-          className={`flex items-center text-black p-2   rounded transition-all duration-300 ${
+          className={`flex items-center  p-2   rounded transition-all duration-300 ${
             pathname === "/" && "bg-primary"
           }`}
         >
@@ -57,7 +51,7 @@ export default function Sidebar() {
         </Link>
         <Link
           href="/saved"
-          className={`flex items-center text-black p-2 rounded transition-all duration-300 ${
+          className={`flex items-center  p-2 rounded transition-all duration-300 ${
             pathname === "/saved" && "bg-primary"
           }`}
         >
@@ -73,20 +67,20 @@ export default function Sidebar() {
           </div>
         </Link>
         <Link
-          href="/next-trip"
-          className={`flex items-center text-black p-2 rounded transition-all duration-300 ${
-            pathname === "/next-trip" && "bg-primary"
+          href="/groups"
+          className={`flex items-center  p-2 rounded transition-all duration-300 ${
+            pathname === "/groups" && "bg-primary"
           }`}
         >
           <div className="flex justify-center items-center h-10">
-            <FontAwesomeIcon icon={faPlaneDeparture} className="w-6" />
+            <FontAwesomeIcon icon={faUsers} className="w-6" />
             <span
               className={`ml-2 transition-opacity duration-300 ${
                 isOpen ? "opacity-100" : "opacity-0"
               }`}
               style={{ whiteSpace: "nowrap" }}
             >
-              Next Trip
+              Groups
             </span>
           </div>
         </Link>

@@ -11,7 +11,7 @@ const CardFront = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
 
   return (
     <div
-      className="relative flex flex-col justify-between text-black border border-gray-200 rounded-md overflow-hidden shadow-md h-[430px]"
+      className="relative flex flex-col justify-between  border border-gray-200 rounded-md overflow-hidden shadow-md h-[430px]"
       key="front"
     >
       <div className=" flex flex-col">

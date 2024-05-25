@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Alice", "location": "New York" },
+  { "id": 2, "name": "Bob", "location": "San Francisco" },
+  { "id": 3, "name": "Charlie", "location": "Los Angeles" },
+  { "id": 4, "name": "David", "location": "Chicago" },
+  { "id": 5, "name": "Eve", "location": "Seattle" },
+  { "id": 6, "name": "Frank", "location": "Boston" },
+  { "id": 7, "name": "Grace", "location": "Austin" },
+  { "id": 8, "name": "Hank", "location": "Denver" }
+]

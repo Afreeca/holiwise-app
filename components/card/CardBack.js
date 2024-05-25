@@ -29,7 +29,7 @@ const CardBack = ({ location, toggleFlip, isFavourite, toggleFavourite }) => {
 
   return (
     <div
-      className="relative flex flex-col text-black border border-gray-200 rounded-md overflow-hidden shadow-md mb-6"
+      className="relative flex flex-col  border border-gray-200 rounded-md overflow-hidden shadow-md mb-6"
       key="back"
     >
       <div className="relative w-full">
