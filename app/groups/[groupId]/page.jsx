@@ -87,7 +87,7 @@ export default function GroupDetails({ params: { groupId } }) {
           </div>
           <div className="flex items-center text-red-600 mb-2">
             <FontAwesomeIcon icon={faExclamationTriangle} className="mr-1" />
-            <span>You can't undo your votes.</span>
+            <span>You can&apos;t undo your votes.</span>
           </div>
           <UserCards group={group} handleOnDrag={handleOnDrag} />
         </div>
