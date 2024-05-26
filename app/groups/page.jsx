@@ -12,8 +12,8 @@ export default function Groups() {
   const { groups, addGroup, deleteGroup, renameGroup } = useGlobalContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCreateGroup = (groupName) => {
-    addGroup(groupName);
+  const handleCreateGroup = (groupName, users) => {
+    addGroup(groupName, users);
   };
 
   const handleDeleteGroup = (groupId) => {

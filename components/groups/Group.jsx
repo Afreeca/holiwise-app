@@ -1,14 +1,17 @@
 import {
   faEdit,
+  faEye,
   faPeopleGroup,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog } from "@headlessui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ThreeDotsMenu from "../ThreeDotsMenu";
 
 const Group = ({ group, onDelete, onRename }) => {
+  const router = useRouter();
   const [isRenaming, setIsRenaming] = useState(false);
   const [newName, setNewName] = useState(group.name);
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +29,12 @@ const Group = ({ group, onDelete, onRename }) => {
     setIsOpen(true);
   };
 
+  const handleGoToGroupPage = () => {
+    router.push(`/groups/${group.id}`);
+  };
+
   const menuOptions = [
+    { label: "view", icon: faEye, action: handleGoToGroupPage },
     { label: "Rename", icon: faEdit, action: handleRename },
     { label: "Delete", icon: faTrash, action: handleDelete },
   ];

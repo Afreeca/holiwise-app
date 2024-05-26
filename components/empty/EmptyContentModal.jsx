@@ -1,7 +1,6 @@
-import Modal from "../Modal";
+import Modal from "../modal/Modal";
 
 const EmptyContentModal = ({
-  isOpen,
   title,
   onClose,
   message,
@@ -10,7 +9,7 @@ const EmptyContentModal = ({
 }) => {
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={true}
       onClose={onClose}
       primaryButtonText={buttonText}
       secondaryButtonText="Cancel"

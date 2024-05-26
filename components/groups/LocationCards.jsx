@@ -8,12 +8,11 @@ const LocationCards = ({
   handleOnDrop,
   handleDragOver,
 }) => {
-  if (group.items.length <= 0) {
+  if (group?.items.length <= 0) {
     return (
       <EmptyContent
         title="No groups found"
-        text="You haven't created any groups yet. Start planning your next trip by
-        creating groups!"
+        text="You haven't created any groups yet. Start planning your next trip by creating groups!"
       />
     );
   }
@@ -22,11 +21,11 @@ const LocationCards = ({
     <div>
       <h2 className="text-xl font-bold">Location(s) on Voting</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-        {group.items.map((location, index) => (
+        {group?.items.map((location, index) => (
           <div
             key={index}
             className="flex gap-2"
-            onDrop={handleOnDrop}
+            onDrop={(e) => handleOnDrop(e, location.id)} // Pass location ID
             onDragOver={handleDragOver}
           >
             <Card
@@ -36,7 +35,7 @@ const LocationCards = ({
               simple
             />
             <div className="h-16">
-              {group.voting.map((vote, index) => (
+              {group.voting[location.id]?.map((vote, index) => (
                 <div key={index}>
                   <span>{vote.username}</span>
                   <div className="flex">

@@ -1,31 +1,70 @@
 "use client";
 
+import BackButton from "@/components/BackButton";
 import Title from "@/components/Title";
+import EmptyContentModal from "@/components/empty/EmptyContentModal";
 import GroupDetailInfo from "@/components/groups/GroupDetailInfo";
 import LocationCards from "@/components/groups/LocationCards";
 import UserCards from "@/components/groups/UserCards";
+import ConfirmationDialog from "@/components/modal/ConfirmationDialog";
 import { useGlobalContext } from "@/context/global";
+import {
+  faExclamationTriangle,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function GroupDetails({ params: { groupId } }) {
-  const { getGroup, updateGroupVoting } = useGlobalContext();
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+  const { getGroup, updateGroupVoting, setGroups } = useGlobalContext();
   const group = getGroup(Number(groupId));
 
-  const handleOnDrag = (e, data) => {
-    e.dataTransfer.setData("application/json", JSON.stringify(data));
+  const handleOnDrag = (e, username) => {
+    e.dataTransfer.setData("application/json", JSON.stringify(username));
   };
 
-  const handleOnDrop = (e) => {
+  const handleOnDrop = (e, itemId) => {
     const dataString = e.dataTransfer.getData("application/json");
-    const data = JSON.parse(dataString);
-    updateGroupVoting(group.id, data);
+    const username = JSON.parse(dataString);
+
+    const userVote = group.voting[itemId]?.find(
+      (vote) => vote.username === username
+    );
+
+    if (userVote && userVote.votes >= 3) {
+      setShowModal(true);
+      return;
+    }
+
+    updateGroupVoting(group.id, itemId, username);
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
+  const handleRedirect = () => {
+    router.push(`/groups`);
+  };
+
+  if (!group) {
+    return (
+      <EmptyContentModal
+        onClose={() => setIsEmptyModalOpen(false)}
+        title="Group"
+        message="Group not found. Create a new group to get started."
+        buttonText="Create Group"
+        onRedirect={handleRedirect}
+      />
+    );
+  }
+
   return (
     <main className="flex flex-col h-screen">
+      <BackButton title="Go back" />
       <Title text="Group Detail" />
       <div className="flex flex-col flex-1 gap-4 overflow-auto">
         <GroupDetailInfo group={group} />
@@ -35,8 +74,31 @@ export default function GroupDetails({ params: { groupId } }) {
           handleOnDrop={handleOnDrop}
           handleDragOver={handleDragOver}
         />
-        <UserCards group={group} handleOnDrag={handleOnDrag} />
+        <div className="mt-4">
+          <div className="flex items-center mb-2">
+            <FontAwesomeIcon
+              icon={faInfoCircle}
+              className="mr-1 text-blue-500"
+            />
+            <span className="text-gray-700">
+              You have 3 votes available. Drag and drop the star once or
+              multiple times on top of the location to vote.
+            </span>
+          </div>
+          <div className="flex items-center text-red-600 mb-2">
+            <FontAwesomeIcon icon={faExclamationTriangle} className="mr-1" />
+            <span>You can't undo your votes.</span>
+          </div>
+          <UserCards group={group} handleOnDrag={handleOnDrag} />
+        </div>
       </div>
+      <ConfirmationDialog
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        title="Vote limit"
+        description="You have already voted three times"
+        onConfirm={() => setShowModal(false)}
+      />
     </main>
   );
 }

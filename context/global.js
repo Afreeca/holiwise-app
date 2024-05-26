@@ -3,36 +3,12 @@
 import { getBritishDate } from "@/utils/date";
 import constate from "constate";
 import { useState } from "react";
-import LOCATIONS from "../__mock__/locations.json";
 import USERS from "../__mock__/users.json";
 
 const useGlobal = () => {
-  const [savedLocations, setSavedLocations] = useState(LOCATIONS.slice(0, 1));
+  const [savedLocations, setSavedLocations] = useState([]);
   const [users, _] = useState(USERS);
-  const [groups, setGroups] = useState([
-    {
-      id: 1,
-      name: "Group 1",
-      creationDate: getBritishDate(),
-      users: users.slice(0, 3),
-      voting: [],
-      items: [],
-    },
-    {
-      id: 2,
-      name: "Group 2",
-      creationDate: getBritishDate(),
-      voting: [
-        { username: "David", votes: 0 },
-        { username: "Eve", votes: 0 },
-        { username: "Frank", votes: 0 },
-        { username: "Grace", votes: 0 },
-        { username: "Hank", votes: 0 },
-      ],
-      users: users.slice(3, 8),
-      items: LOCATIONS.slice(0, 1),
-    },
-  ]);
+  const [groups, setGroups] = useState([]);
 
   const setSavedLocation = (location) => {
     const item = getLocationById(location.id);
@@ -47,13 +23,13 @@ const useGlobal = () => {
     return savedLocations.some((location) => location.id === id);
   };
 
-  const addGroup = (groupName) => {
+  const addGroup = (groupName, groupUsers) => {
     const newGroup = {
       id: groups.length + 1,
       name: groupName,
       creationDate: getBritishDate(),
       items: [],
-      users: [],
+      users: groupUsers,
       voting: [],
     };
     setGroups((prevGroups) => [...prevGroups, newGroup]);
@@ -66,9 +42,7 @@ const useGlobal = () => {
   };
 
   const findGroup = (groupId) => {
-    return groups.find((group) => {
-      return group.id === groupId;
-    });
+    return groups.find((group) => group.id === groupId);
   };
 
   const renameGroup = (groupId, newName) => {
@@ -90,6 +64,10 @@ const useGlobal = () => {
               )
                 ? group.items
                 : [...group.items, item],
+              voting: {
+                ...group.voting,
+                [item.id]: group.voting[item.id] ? group.voting[item.id] : [],
+              },
             }
           : group
       )
@@ -106,22 +84,27 @@ const useGlobal = () => {
     );
   };
 
-  const updateGroupVoting = (groupId, username, increment = true) => {
+  const updateGroupVoting = (groupId, itemId, username, increment = true) => {
     setGroups((prevGroups) =>
       prevGroups.map((group) =>
         group.id === groupId
           ? {
               ...group,
-              voting: group.voting.some((vote) => vote.username === username)
-                ? group.voting.map((vote) =>
-                    vote.username === username
-                      ? {
-                          ...vote,
-                          votes: increment ? vote.votes + 1 : vote.votes - 1,
-                        }
-                      : vote
-                  )
-                : [...group.voting, { username, votes: 0 }],
+              voting: {
+                ...group.voting,
+                [itemId]: group.voting[itemId].some(
+                  (vote) => vote.username === username
+                )
+                  ? group.voting[itemId].map((vote) =>
+                      vote.username === username
+                        ? {
+                            ...vote,
+                            votes: increment ? vote.votes + 1 : vote.votes - 1,
+                          }
+                        : vote
+                    )
+                  : [...group.voting[itemId], { username, votes: 1 }],
+              },
             }
           : group
       )

@@ -1,15 +1,28 @@
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useGlobalContext } from "../../context/global";
-import Modal from "../Modal";
+import Modal from "../modal/Modal";
 
 const NewGroupModal = ({ isOpen, onClose, onCreate }) => {
   const { users } = useGlobalContext();
   const [groupName, setGroupName] = useState("");
   const [selectedUsers, setSelectedUsers] = useState([]);
 
+  const handleSelectChange = (e) => {
+    const result = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedUsers(result);
+  };
+
   const handleCreate = () => {
-    if (groupName.trim() !== "") {
-      onCreate(groupName, selectedUsers);
+    const filteredUsers = users.filter((user) =>
+      selectedUsers.includes(user.id.toString())
+    );
+    if (groupName.trim() !== "" && filteredUsers.length > 0) {
+      onCreate(groupName, filteredUsers);
       setGroupName("");
       setSelectedUsers([]);
       onClose();
@@ -24,9 +37,7 @@ const NewGroupModal = ({ isOpen, onClose, onCreate }) => {
       secondaryButtonText="Cancel"
     >
       <div className="sm:flex sm:items-start">
-        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-          {/* Add your SVG or icon for the group */}
-        </div>
+        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"></div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
           <h3
             className="text-base font-semibold leading-6 text-gray-900"
@@ -42,15 +53,19 @@ const NewGroupModal = ({ isOpen, onClose, onCreate }) => {
               placeholder="Enter group name"
               className="border border-gray-300 p-2 w-full mb-4"
             />
-            {/* Dropdown to select users */}
+            <div className="flex items-center mb-2">
+              <FontAwesomeIcon
+                icon={faInfoCircle}
+                className="mr-1 text-blue-500"
+              />
+              <span className="text-gray-700">
+                Press Ctrl and right click to select multiple friends
+              </span>
+            </div>
             <select
               multiple
               value={selectedUsers}
-              onChange={(e) =>
-                setSelectedUsers(
-                  Array.from(e.target.selectedOptions, (option) => option.value)
-                )
-              }
+              onChange={handleSelectChange}
               className="border border-gray-300 p-2 w-full"
             >
               {users.map((user) => (
