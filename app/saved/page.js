@@ -1,24 +1,14 @@
 "use client";
 
-import DroppableArea from "@/components/DroppableArea";
-import EmptyContent from "@/components/EmptyContent";
-import EmptyContentModal from "@/components/EmptyContentModal";
 import SectionInfo from "@/components/SectionInfo/SectionInfo";
 import Title from "@/components/Title";
 import Card from "@/components/card/card";
+import DroppableArea from "@/components/dragAndDrop/DroppableArea";
+import EmptyContent from "@/components/empty/EmptyContent";
+import EmptyContentModal from "@/components/empty/EmptyContentModal";
 import { useGlobalContext } from "@/context/global";
+import { savedSectionInfo } from "@/utils/constants";
 import { useRouter } from "next/navigation";
-
-const savedSectionInfo = {
-  title: "Save and vote for your favorite Locations for the Perfect Trip!",
-  content: [
-    "Discover amazing destinations and make them part of your travel plans:",
-    "• Save Locations: Browse through our extensive list of stunning places and save your favorites.",
-    "• Easy Access: Keep all your top picks in one place for quick and easy access.",
-    "• Vote and Choose: When it's time to plan, add your saved locations to a trip group and let your friends vote. The location with the most votes will be your next adventure!",
-    "Enhance your travel planning experience by saving your favorite spots today. Your dream trip is just a few votes away!",
-  ],
-};
 
 export default function Saved() {
   const { savedLocations, groups, addGroupItem } = useGlobalContext();

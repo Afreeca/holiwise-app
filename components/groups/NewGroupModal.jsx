@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useGlobalContext } from "../../context/global";
 import Modal from "../Modal";
 
-const NewFolderModal = ({ isOpen, onClose, onCreate }) => {
-  const [folderName, setFolderName] = useState("");
+const NewGroupModal = ({ isOpen, onClose, onCreate }) => {
+  const { users } = useGlobalContext();
+  const [groupName, setGroupName] = useState("");
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const handleCreate = () => {
-    if (folderName.trim() !== "") {
-      onCreate(folderName);
-      setFolderName("");
+    if (groupName.trim() !== "") {
+      onCreate(groupName, selectedUsers);
+      setGroupName("");
+      setSelectedUsers([]);
       onClose();
     }
   };
@@ -21,36 +25,40 @@ const NewFolderModal = ({ isOpen, onClose, onCreate }) => {
     >
       <div className="sm:flex sm:items-start">
         <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-          <svg
-            className="h-6 w-6 text-red-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-            />
-          </svg>
+          {/* Add your SVG or icon for the group */}
         </div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
           <h3
             className="text-base font-semibold leading-6 text-gray-900"
             id="modal-title"
           >
-            Create New Folder
+            Create New Group
           </h3>
           <div className="mt-2">
             <input
               type="text"
-              value={folderName}
-              onChange={(e) => setFolderName(e.target.value)}
-              placeholder="Enter folder name"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+              placeholder="Enter group name"
               className="border border-gray-300 p-2 w-full mb-4"
             />
+            {/* Dropdown to select users */}
+            <select
+              multiple
+              value={selectedUsers}
+              onChange={(e) =>
+                setSelectedUsers(
+                  Array.from(e.target.selectedOptions, (option) => option.value)
+                )
+              }
+              className="border border-gray-300 p-2 w-full"
+            >
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>
@@ -72,4 +80,4 @@ const NewFolderModal = ({ isOpen, onClose, onCreate }) => {
   );
 };
 
-export default NewFolderModal;
+export default NewGroupModal;

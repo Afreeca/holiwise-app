@@ -8,9 +8,9 @@ import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import ThreeDotsMenu from "../ThreeDotsMenu";
 
-const Folder = ({ folder, onDelete, onRename }) => {
+const Group = ({ group, onDelete, onRename }) => {
   const [isRenaming, setIsRenaming] = useState(false);
-  const [newName, setNewName] = useState(folder.name);
+  const [newName, setNewName] = useState(group.name);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleRename = () => {
@@ -19,7 +19,7 @@ const Folder = ({ folder, onDelete, onRename }) => {
 
   const handleSaveRename = () => {
     setIsRenaming(false);
-    onRename(folder.id, newName);
+    onRename(group.id, newName);
   };
 
   const handleDelete = () => {
@@ -45,7 +45,7 @@ const Folder = ({ folder, onDelete, onRename }) => {
               className="border-b border-transparent focus:border-blue-500 focus:outline-none"
             />
           ) : (
-            <span className="text-xl font-semibold">{folder.name}</span>
+            <span className="text-xl font-semibold">{group.name}</span>
           )}
           <ThreeDotsMenu options={menuOptions} />
         </div>
@@ -55,12 +55,12 @@ const Folder = ({ folder, onDelete, onRename }) => {
         />
         <div className="mt-2">
           <p className="text-sm text-gray-500">
-            Created on: {folder.creationDate}
+            Created on: {group.creationDate}
           </p>
           <div className="mt-2">
             <p className="text-sm text-gray-700">Users in the group:</p>
             <ul className="list-disc list-inside">
-              {folder.users?.map((user) => (
+              {group.users?.map((user) => (
                 <li key={user.id} className="text-sm text-gray-600">
                   {user.name}
                 </li>
@@ -80,7 +80,7 @@ const Folder = ({ folder, onDelete, onRename }) => {
               Confirm Deletion
             </Dialog.Title>
             <Dialog.Description className="text-sm text-gray-500">
-              Are you sure you want to delete this folder? This action cannot be
+              Are you sure you want to delete this group? This action cannot be
               undone.
             </Dialog.Description>
             <div className="flex space-x-4">
@@ -92,7 +92,7 @@ const Folder = ({ folder, onDelete, onRename }) => {
               </button>
               <button
                 onClick={() => {
-                  onDelete(folder.id);
+                  onDelete(group.id);
                   setIsOpen(false);
                 }}
                 className="px-4 py-2 bg-red-600 text-white rounded-md"
@@ -107,4 +107,4 @@ const Folder = ({ folder, onDelete, onRename }) => {
   );
 };
 
-export default Folder;
+export default Group;

@@ -1,5 +1,5 @@
-import EmptyContent from "@/components/EmptyContent";
 import Card from "@/components/card/card";
+import EmptyContent from "@/components/empty/EmptyContent";
 import Star from "../voting/Star";
 
 const LocationCards = ({

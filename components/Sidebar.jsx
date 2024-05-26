@@ -8,9 +8,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
+  const path = usePathname();
   const { isOpen, toggle } = useSidebarContext();
-  const pathname = usePathname();
-  const primaryColour = "rgb(162 223 255/var(--tw-bg-opacity))";
+
+  const isRouteActive = (pathname) => {
+    if (pathname === "/") {
+      return path === "/";
+    } else {
+      return path.startsWith(pathname);
+    }
+  };
 
   return (
     <div
@@ -35,7 +42,7 @@ export default function Sidebar() {
         <Link
           href="/"
           className={`flex items-center  p-2   rounded transition-all duration-300 ${
-            pathname === "/" && "bg-primary"
+            isRouteActive("/") && "bg-primary"
           }`}
         >
           <div className="flex justify-center items-center h-10">
@@ -52,7 +59,7 @@ export default function Sidebar() {
         <Link
           href="/saved"
           className={`flex items-center  p-2 rounded transition-all duration-300 ${
-            pathname === "/saved" && "bg-primary"
+            isRouteActive("/saved") && "bg-primary"
           }`}
         >
           <div className="flex justify-center items-center h-10">
@@ -69,7 +76,7 @@ export default function Sidebar() {
         <Link
           href="/groups"
           className={`flex items-center  p-2 rounded transition-all duration-300 ${
-            pathname === "/groups" && "bg-primary"
+            isRouteActive("/groups") && "bg-primary"
           }`}
         >
           <div className="flex justify-center items-center h-10">

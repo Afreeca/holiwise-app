@@ -1,9 +1,9 @@
 "use client";
 
 import Title from "@/components/Title";
-import GroupDetailInfo from "@/components/group/GroupDetailInfo";
-import LocationCards from "@/components/group/LocationCards";
-import UserCards from "@/components/group/UserCards";
+import GroupDetailInfo from "@/components/groups/GroupDetailInfo";
+import LocationCards from "@/components/groups/LocationCards";
+import UserCards from "@/components/groups/UserCards";
 import { useGlobalContext } from "@/context/global";
 
 export default function GroupDetails({ params: { groupId } }) {
