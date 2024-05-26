@@ -11,8 +11,8 @@ const LocationCards = ({
   if (group?.items.length <= 0) {
     return (
       <EmptyContent
-        title="No groups found"
-        text="You haven't created any groups yet. Start planning your next trip by creating groups!"
+        title="No Trip Locations Added"
+        text="You haven't added any trip locations for others to vote on yet. Start planning your next adventure by adding some exciting destinations!"
       />
     );
   }
@@ -25,7 +25,7 @@ const LocationCards = ({
           <div
             key={index}
             className="flex gap-2"
-            onDrop={(e) => handleOnDrop(e, location.id)} // Pass location ID
+            onDrop={(e) => handleOnDrop(e, location.id)}
             onDragOver={handleDragOver}
           >
             <Card

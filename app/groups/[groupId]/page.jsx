@@ -75,20 +75,27 @@ export default function GroupDetails({ params: { groupId } }) {
           handleDragOver={handleDragOver}
         />
         <div className="mt-4">
-          <div className="flex items-center mb-2">
-            <FontAwesomeIcon
-              icon={faInfoCircle}
-              className="mr-1 text-blue-500"
-            />
-            <span className="text-gray-700">
-              You have 3 votes available. Drag and drop the star once or
-              multiple times on top of the location to vote.
-            </span>
-          </div>
-          <div className="flex items-center text-red-600 mb-2">
-            <FontAwesomeIcon icon={faExclamationTriangle} className="mr-1" />
-            <span>You can&apos;t undo your votes.</span>
-          </div>
+          {group?.items.length > 0 && (
+            <>
+              <div className="flex items-center mb-2">
+                <FontAwesomeIcon
+                  icon={faInfoCircle}
+                  className="mr-1 text-blue-500"
+                />
+                <span className="text-gray-700">
+                  You have 3 votes available. Drag and drop the star once or
+                  multiple times on top of the location to vote.
+                </span>
+              </div>
+              <div className="flex items-center text-red-600 mb-2">
+                <FontAwesomeIcon
+                  icon={faExclamationTriangle}
+                  className="mr-1"
+                />
+                <span>You can&apos;t undo your votes.</span>
+              </div>
+            </>
+          )}
           <UserCards group={group} handleOnDrag={handleOnDrag} />
         </div>
       </div>
