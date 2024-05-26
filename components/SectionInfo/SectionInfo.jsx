@@ -22,13 +22,13 @@ const SectionInfo = ({ title, content }) => {
         </h2>
         <button
           onClick={toggleExpand}
-          className="text-blue-500 hover:underline self-start sm:order-3"
+          className="text-blue-500 hover:underline self-center sm:order-3"
         >
           {isExpanded ? "See Less" : "See More"}
         </button>
       </div>
       {isExpanded && (
-        <div className="text-gray-700 mt-2">
+        <div className="text-gray-700 mt-2 overflow-y-auto max-h-60 pr-1">
           <ul>
             {content.map((paragraph, index) => (
               <Paragraph paragraph={paragraph} index={index} key={index} />
