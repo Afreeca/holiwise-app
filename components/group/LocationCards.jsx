@@ -1,3 +1,4 @@
+import EmptyContent from "@/components/EmptyContent";
 import Card from "@/components/card/card";
 import Star from "../voting/Star";
 
@@ -7,6 +8,16 @@ const LocationCards = ({
   handleOnDrop,
   handleDragOver,
 }) => {
+  if (group.items.length <= 0) {
+    return (
+      <EmptyContent
+        title="No groups found"
+        text="You haven't created any groups yet. Start planning your next trip by
+        creating groups!"
+      />
+    );
+  }
+
   return (
     <div>
       <h2 className="text-xl font-bold">Location(s) on Voting</h2>

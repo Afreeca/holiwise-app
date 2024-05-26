@@ -1,7 +1,8 @@
 "use client";
 
 import DroppableArea from "@/components/DroppableArea";
-import EmptyContentModal from "@/components/EmptyContent";
+import EmptyContent from "@/components/EmptyContent";
+import EmptyContentModal from "@/components/EmptyContentModal";
 import SectionInfo from "@/components/SectionInfo/SectionInfo";
 import Title from "@/components/Title";
 import Card from "@/components/card/card";
@@ -17,20 +18,6 @@ const savedSectionInfo = {
     "• Vote and Choose: When it's time to plan, add your saved locations to a trip group and let your friends vote. The location with the most votes will be your next adventure!",
     "Enhance your travel planning experience by saving your favorite spots today. Your dream trip is just a few votes away!",
   ],
-};
-
-const EmptyGroups = () => {
-  return (
-    <div className="mb-6 border-dashed border-2 border-gray-300 p-4 mt-4 bg-gray-100 relative">
-      <div className="text-center">
-        <p className="text-xl font-semibold">No groups found</p>
-        <p className="text-gray-500">
-          You haven't created any groups yet. Start planning your next trip by
-          creating groups!
-        </p>
-      </div>
-    </div>
-  );
 };
 
 export default function Saved() {
@@ -72,7 +59,11 @@ export default function Saved() {
         <div className="flex-1 overflow-auto">
           <div className="flex flex-wrap">
             {groups.length <= 0 ? (
-              <EmptyGroups />
+              <EmptyContent
+                title="No groups found"
+                text="You haven't created any groups yet. Start planning your next trip by
+              creating groups!"
+              />
             ) : (
               groups.map((group, index) => (
                 <div key={index} className="w-auto p-1">
