@@ -11,11 +11,11 @@ const SectionInfo = ({ title, content }) => {
   };
 
   return (
-    <div className="shadow-md rounded-lg p-2">
+    <div className="shadow-sm rounded-lg p-2">
       <div className="flex flex-col sm:flex-row items-center gap-1">
         <FontAwesomeIcon
           icon={faInfoCircle}
-          className="text-blue-300 w-4 h-4 sm:mr-4 sm:order-1"
+          className="text-blue-300 w-4 h-4 sm:mr-2 sm:order-1"
         />
         <h2 className="text-xl font-semibold text-gray-800 sm:order-2 mb-2 sm:mb-0">
           {title}

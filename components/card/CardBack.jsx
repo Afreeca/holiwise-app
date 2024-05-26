@@ -1,6 +1,6 @@
 import {
+  faBookmark,
   faCocktail,
-  faHeart,
   faHome,
   faPlane,
   faShieldAlt,
@@ -13,6 +13,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CardBack = ({
+  simple,
   location,
   toggleFlip,
   isSavedLocation,
@@ -38,13 +39,15 @@ const CardBack = ({
       key="back"
     >
       <div className="relative w-full">
-        <FontAwesomeIcon
-          icon={faHeart}
-          className={`absolute top-2 right-2 z-10 cursor-pointer ${
-            isSavedLocation ? "text-red-500" : "text-white"
-          }`}
-          onClick={() => toggleSavedLocation(location)}
-        />
+        {!simple && (
+          <FontAwesomeIcon
+            icon={faBookmark}
+            className={`absolute top-2 right-2 z-10 cursor-pointer ${
+              isSavedLocation ? "text-blue-500" : "text-white"
+            }`}
+            onClick={() => toggleSavedLocation(location)}
+          />
+        )}
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-2">{name}</h3>

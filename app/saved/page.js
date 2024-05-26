@@ -1,7 +1,7 @@
 "use client";
 
 import DroppableArea from "@/components/DroppableArea";
-import EmptyContentModal from "@/components/EmptyConten";
+import EmptyContentModal from "@/components/EmptyContent";
 import SectionInfo from "@/components/SectionInfo/SectionInfo";
 import Title from "@/components/Title";
 import Card from "@/components/card/card";

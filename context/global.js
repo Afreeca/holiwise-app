@@ -3,41 +3,34 @@
 import { getBritishDate } from "@/utils/date";
 import constate from "constate";
 import { useState } from "react";
+import LOCATIONS from "../__mock__/locations.json";
 import USERS from "../__mock__/users.json";
 
 const useGlobal = () => {
-  const [savedLocations, setSavedLocations] = useState([
-    {
-      id: 1,
-      name: "Bali, Indonesia",
-      image:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhandluggageonly.co.uk%2Fwp-content%2Fuploads%2F2015%2F08%2FIMG_1123.jpg&f=1&nofb=1&ipt=54d863202b16f0749e2dd2a2a14d37069f3ed6d720705475b8e8813699a942e2&ipo=images",
-      averageFlightCost: "$600",
-      shortRent: "$30 per night",
-      foodPrice: "$10 - $20 per meal",
-      drinkPrice: "$2 - $5 per drink",
-      temperature: "25-30°C (77-86°F) all year round",
-      safety: "Generally safe for tourists",
-      popularity: "Very popular tourist destination",
-      review: "4.5/5",
-      partyLife: "Vibrant nightlife scene",
-      nature: "Beautiful beaches, lush landscapes",
-      holidayType: "Beach holiday, cultural experiences",
-    },
-  ]);
+  const [savedLocations, setSavedLocations] = useState(LOCATIONS.slice(0, 1));
   const [users, _] = useState(USERS);
   const [groups, setGroups] = useState([
     {
       id: 1,
       name: "Group 1",
       creationDate: getBritishDate(),
+      users: users.slice(0, 3),
+      voting: [],
       items: [],
     },
     {
       id: 2,
       name: "Group 2",
       creationDate: getBritishDate(),
-      items: [],
+      voting: [
+        { username: "David", votes: 0 },
+        { username: "Eve", votes: 0 },
+        { username: "Frank", votes: 0 },
+        { username: "Grace", votes: 0 },
+        { username: "Hank", votes: 0 },
+      ],
+      users: users.slice(3, 8),
+      items: LOCATIONS.slice(0, 1),
     },
   ]);
 
@@ -60,6 +53,8 @@ const useGlobal = () => {
       name: groupName,
       creationDate: getBritishDate(),
       items: [],
+      users: [],
+      voting: [],
     };
     setGroups((prevGroups) => [...prevGroups, newGroup]);
   };
@@ -68,6 +63,12 @@ const useGlobal = () => {
     setGroups((prevGroups) =>
       prevGroups.filter((group) => group.id !== groupId)
     );
+  };
+
+  const findGroup = (groupId) => {
+    return groups.find((group) => {
+      return group.id === groupId;
+    });
   };
 
   const renameGroup = (groupId, newName) => {
@@ -105,6 +106,46 @@ const useGlobal = () => {
     );
   };
 
+  const updateGroupVoting = (groupId, username, increment = true) => {
+    setGroups((prevGroups) =>
+      prevGroups.map((group) =>
+        group.id === groupId
+          ? {
+              ...group,
+              voting: group.voting.some((vote) => vote.username === username)
+                ? group.voting.map((vote) =>
+                    vote.username === username
+                      ? {
+                          ...vote,
+                          votes: increment ? vote.votes + 1 : vote.votes - 1,
+                        }
+                      : vote
+                  )
+                : [...group.voting, { username, votes: 0 }],
+            }
+          : group
+      )
+    );
+  };
+
+  const addUserToGroup = (groupId, user) => {
+    setGroups((prevGroups) =>
+      prevGroups.map((group) =>
+        group.id === groupId
+          ? {
+              ...group,
+              users: group.users.some((u) => u.id === user.id)
+                ? group.users
+                : [...group.users, user],
+              voting: group.voting.some((vote) => vote.username === user.name)
+                ? group.voting
+                : [...group.voting, { username: user.name, votes: 0 }],
+            }
+          : group
+      )
+    );
+  };
+
   return {
     users,
     savedLocations,
@@ -112,10 +153,13 @@ const useGlobal = () => {
     getSavedLocation: getLocationById,
     groups,
     addGroup,
+    getGroup: findGroup,
     renameGroup,
     deleteGroup,
     addGroupItem,
     removeGroupItem,
+    updateGroupVoting,
+    addUserToGroup,
   };
 };
 
