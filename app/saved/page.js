@@ -2,10 +2,22 @@
 
 import DroppableArea from "@/components/DroppableArea";
 import EmptyContentModal from "@/components/EmptyConten";
+import SectionInfo from "@/components/SectionInfo/SectionInfo";
 import Title from "@/components/Title";
 import Card from "@/components/card/card";
 import { useGlobalContext } from "@/context/global";
 import { useRouter } from "next/navigation";
+
+const savedSectionInfo = {
+  title: "Save and vote for your favorite Locations for the Perfect Trip!",
+  content: [
+    "Discover amazing destinations and make them part of your travel plans:",
+    "• Save Locations: Browse through our extensive list of stunning places and save your favorites.",
+    "• Easy Access: Keep all your top picks in one place for quick and easy access.",
+    "• Vote and Choose: When it's time to plan, add your saved locations to a trip group and let your friends vote. The location with the most votes will be your next adventure!",
+    "Enhance your travel planning experience by saving your favorite spots today. Your dream trip is just a few votes away!",
+  ],
+};
 
 const EmptyGroups = () => {
   return (
@@ -46,6 +58,7 @@ export default function Saved() {
   return (
     <main className="flex flex-col h-screen">
       <Title text="Saved" />
+      <SectionInfo {...savedSectionInfo} />
       {savedLocations?.length <= 0 ? (
         <EmptyContentModal
           isOpen={savedLocations.length <= 0}
@@ -62,7 +75,7 @@ export default function Saved() {
               <EmptyGroups />
             ) : (
               groups.map((group, index) => (
-                <div key={index} className="w-auto ">
+                <div key={index} className="w-auto p-1">
                   <DroppableArea
                     group={group}
                     onDragOver={handleDragOver}

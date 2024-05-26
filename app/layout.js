@@ -1,8 +1,12 @@
 import Sidebar from "@/components/sidebar";
 import { GlobalContextProvider } from "@/context/global";
 import { SidebarContextProvider } from "@/context/useSidebar";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css"; // prevent awsome icons issues
 import { Inter } from "next/font/google";
 import "./globals.css";
+
+config.autoAddCss = false; // Prevent Font Awesome from auto-adding CSS
 
 const inter = Inter({ subsets: ["latin"] });
 
