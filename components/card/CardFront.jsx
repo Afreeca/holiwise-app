@@ -12,9 +12,9 @@ const CardFront = ({
 
   return (
     <div
-      className={`relative flex flex-col justify-between border border-gray-200 rounded-md overflow-hidden shadow-md h-auto ${
-        simple && "w-40"
-      }`}
+      className={`relative flex flex-col justify-between border border-gray-200 rounded-md overflow-hidden shadow-md ${
+        simple ? "h-auto" : "h-[300px]"
+      }  ${simple && "w-40"}`}
       key="front"
     >
       <div className="flex flex-col">

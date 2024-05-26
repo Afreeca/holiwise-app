@@ -17,7 +17,7 @@ const Card = ({ location, onDragStart, simple = false }) => {
   return (
     <div
       draggable
-      className="h-auto"
+      className={`${simple ? "h-auto" : "h-[340px]"}`}
       onDragStart={(e) => onDragStart(e, location)}
     >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
