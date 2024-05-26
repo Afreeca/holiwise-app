@@ -12,10 +12,10 @@ const CardFront = ({
 
   return (
     <div
-      className="relative flex flex-col justify-between  border border-gray-200 rounded-md overflow-hidden shadow-md h-auto"
+      className="relative flex flex-col justify-between border border-gray-200 rounded-md overflow-hidden shadow-md h-auto"
       key="front"
     >
-      <div className=" flex flex-col">
+      <div className="flex flex-col">
         <div
           className={`relative w-full ${
             simple ? "h-28" : "h-48"
@@ -33,7 +33,7 @@ const CardFront = ({
           )}
         </div>
         <div className="px-4 py-2">
-          <h3 className="text-lg font-semibold mb-2">{name}</h3>
+          <h3 className="text-lg font-semibold mb-2 truncate">{name}</h3>
         </div>
       </div>
       {!simple && (
