@@ -20,12 +20,11 @@ export default function Sidebar() {
     }
   };
 
-  const width = `w-[${isOpen ? sidebarExpandedSize : sidebarCollapsedSize}]`;
-
+  const widthSize = isOpen ? sidebarExpandedSize : sidebarCollapsedSize;
   return (
     <div
       className={`flex flex-col
-        ${width} bg-white h-screen transition-width duration-300 border border-gray-200`}
+        w-[${widthSize}] bg-white h-screen transition-width duration-300 border border-gray-200`}
     >
       <div
         className={`flex items-center justify-between h-16 p-4 ${
