@@ -1,25 +1,52 @@
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  closeX,
+  primaryButtonText,
+  secondaryButtonText,
+  children,
+}) => {
   if (!isOpen) return null;
+
+  const hasPrimaryButton = !!primaryButtonText;
+  const hasSecondaryButton = !!secondaryButtonText;
 
   return (
     <div
-      className="fixed inset-0 z-10"
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
+      className={`fixed z-10 flex items-center justify-center bg-black bg-opacity-50 p-4 h-full w-auto sm:w-full`}
     >
-      <div
-        className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-        onClick={onClose}
-      ></div>
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-            <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-              {children}
-            </div>
-          </div>
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl overflow-hidden">
+        <div className="flex justify-end p-2">
+          {closeX && (
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              &times;
+            </button>
+          )}
         </div>
+        <div className="px-4 py-2">{children}</div>
+        {(hasPrimaryButton || hasSecondaryButton) && (
+          <div className="flex justify-end p-4 space-x-2">
+            {hasSecondaryButton && (
+              <button
+                onClick={onClose}
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
+              >
+                {secondaryButtonText}
+              </button>
+            )}
+            {hasPrimaryButton && (
+              <button
+                onClick={primaryButtonText}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                {primaryButtonText}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

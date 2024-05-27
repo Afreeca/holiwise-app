@@ -4,7 +4,7 @@ import ReactCardFlip from "react-card-flip";
 import CardBack from "./CardBack";
 import CardFront from "./CardFront";
 
-const Card = ({ location, onDragStart, simple = false }) => {
+const Card = ({ location, onDragStart, small = false }) => {
   const { getSavedLocation, toggleSavedLocation } = useGlobalContext();
 
   const isSavedLocation = getSavedLocation(location.id);
@@ -15,21 +15,17 @@ const Card = ({ location, onDragStart, simple = false }) => {
   };
 
   return (
-    <div
-      draggable
-      className={`${simple ? "h-auto" : "h-[340px]"}`}
-      onDragStart={(e) => onDragStart(e, location)}
-    >
+    <div draggable onDragStart={(e) => onDragStart(e, location)}>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <CardFront
-          simple={simple}
+          small={small}
           location={location}
           toggleFlip={toggleFlip}
           isSavedLocation={isSavedLocation}
           toggleSavedLocation={toggleSavedLocation}
         />
         <CardBack
-          simple={simple}
+          small={small}
           location={location}
           toggleFlip={toggleFlip}
           isSavedLocation={isSavedLocation}

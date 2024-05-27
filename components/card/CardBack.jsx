@@ -13,7 +13,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CardBack = ({
-  simple,
+  small,
   location,
   toggleFlip,
   isSavedLocation,
@@ -39,7 +39,7 @@ const CardBack = ({
       key="back"
     >
       <div className="relative w-full">
-        {!simple && (
+        {!small && (
           <FontAwesomeIcon
             icon={faBookmark}
             className={`absolute top-2 right-2 z-10 cursor-pointer ${

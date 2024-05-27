@@ -32,7 +32,7 @@ const LocationCards = ({
               key={index}
               location={location}
               onDragStart={handleOnDrag}
-              simple
+              small
             />
             <div className="h-16">
               {group.voting[location.id]?.map((vote, index) => (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSidebarContext } from "@/context/useSidebar";
+import { sidebarCollapsedSize, sidebarExpandedSize } from "@/utils/constants";
 import { faBookmark, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -21,8 +22,8 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`flex flex-col ${
-        isOpen ? "w-auto" : "w-20"
+      className={`flex flex-col 
+        w-[${isOpen ? sidebarExpandedSize : sidebarCollapsedSize}]
       } bg-white h-screen transition-width duration-300 border border-gray-200`}
     >
       <div

@@ -1,6 +1,9 @@
 export const appName = "Holiwise";
 export const appDescription = "Travel inspiration starts here";
 
+export const sidebarExpandedSize = "140px";
+export const sidebarCollapsedSize = "80px";
+
 export const groupsPageInfo = {
   title: "Create Your Dream Trip Group Today!",
   content: [

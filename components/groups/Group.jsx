@@ -66,10 +66,10 @@ const Group = ({ group, onDelete, onRename }) => {
             Created on: {group.creationDate}
           </p>
           <div className="mt-2">
-            <p className="text-sm text-gray-700">Users in the group:</p>
+            <p className="text-sm text-gray-700">Users:</p>
             <ul className="list-disc list-inside">
               {group.users?.map((user) => (
-                <li key={user.id} className="text-sm text-gray-600">
+                <li key={user.id} className="text-sm text-gray-600 pl-2">
                   {user.name}
                 </li>
               ))}

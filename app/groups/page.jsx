@@ -35,7 +35,7 @@ export default function Groups() {
         >
           New Group
         </button>
-        <div className="grid grid-flow-col auto-cols-max gap-2">
+        <div className="flex gap-2 flex-wrap">
           {groups?.map((group) => (
             <Group
               key={group.id}

@@ -1,4 +1,3 @@
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Popover,
@@ -11,7 +10,9 @@ const ThreeDotsMenu = ({ options }) => {
   return (
     <Popover className="relative">
       <PopoverButton>
-        <FontAwesomeIcon icon={faEllipsisV} className="cursor-pointer" />
+        <span className="cursor-pointer text-gray-600 text-xl inline-block transform rotate-90">
+          &#8943;
+        </span>
       </PopoverButton>
       <Transition
         enter="transition ease-out duration-200"
