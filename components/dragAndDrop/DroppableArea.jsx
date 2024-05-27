@@ -15,7 +15,7 @@ const DroppableArea = ({ group, onDrop, onDragOver }) => {
   };
 
   return (
-    <div className="mb-6 border-dashed border-2 border-gray-300 p-4 mt-4 bg-gray-100 relative">
+    <div className="mb-2 border-dashed border-2 border-gray-300 p-4 mt-4 bg-gray-100 relative">
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-xl font-semibold">{name}</h2>
         <Link
@@ -25,13 +25,13 @@ const DroppableArea = ({ group, onDrop, onDragOver }) => {
           View
         </Link>
       </div>
-      <div className="page min-h-32" onDrop={onDrop} onDragOver={onDragOver}>
-        <div className="flex  gap-1 items-center text-gray-500 text-center">
+      <div onDrop={onDrop} onDragOver={onDragOver}>
+        <div className="flex gap-1 items-center text-gray-500 text-center">
           <FontAwesomeIcon icon={faArrowsAlt} className="" size="sm" />
           Drag n drop for voting
         </div>
         {items?.map((item, index) => (
-          <div className="dropped-widget" key={index}>
+          <div key={index}>
             <DraggedItem location={item} onRemove={handleRemove} />
           </div>
         ))}

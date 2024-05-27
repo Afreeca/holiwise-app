@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <GlobalContextProvider>
           <SidebarContextProvider>
             <Sidebar />
-            <div className="px-2 flex-grow transition-all duration-300">
+            <div className="px-3 flex-grow transition-all duration-300">
               {children}
             </div>
           </SidebarContextProvider>
