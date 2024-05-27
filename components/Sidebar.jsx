@@ -1,7 +1,6 @@
 "use client";
 
 import { useSidebarContext } from "@/context/useSidebar";
-import { sidebarCollapsedSize, sidebarExpandedSize } from "@/utils/constants";
 import { faBookmark, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
@@ -20,12 +19,13 @@ export default function Sidebar() {
     }
   };
 
-  const widthSize = isOpen ? sidebarExpandedSize : sidebarCollapsedSize;
+  const width = isOpen
+    ? "flex flex-col w-[140px] bg-white h-screen transition-width duration-300 border border-gray-200"
+    : "flex flex-col w-[80px] bg-white h-screen transition-width duration-300 border border-gray-200";
+
+  console.log("width: ", width);
   return (
-    <div
-      className={`flex flex-col
-        w-[${widthSize}] bg-white h-screen transition-width duration-300 border border-gray-200`}
-    >
+    <div className={width}>
       <div
         className={`flex items-center justify-between h-16 p-4 ${
           isOpen && "px-6"
