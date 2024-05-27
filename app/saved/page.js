@@ -10,20 +10,64 @@ import Slide from "@/components/slide/Slide";
 import { useGlobalContext } from "@/context/global";
 import { savedSectionInfo } from "@/utils/constants";
 import { useRouter } from "next/navigation";
+import { useCallback, useRef, useState } from "react";
 
 export default function Saved() {
   const { savedLocations, groups, addGroupItem } = useGlobalContext();
   const router = useRouter();
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [touchPoint, setTouchPoint] = useState(null);
+  const touchMoveRef = useRef();
+  const touchEndRef = useRef();
 
-  const handleRedirect = () => {
+  const handleRedirect = useCallback(() => {
     router.push(`/`);
-  };
+  }, [router]);
 
   const handleOnDrag = (e, data) => {
+    setDraggedItem(data);
     e.dataTransfer.setData("application/json", JSON.stringify(data));
   };
 
+  const handleTouchStart = (e, data) => {
+    setDraggedItem(data);
+    setTouchPoint({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    e.target.style.opacity = 0.5;
+
+    touchMoveRef.current = handleTouchMove.bind(null);
+    touchEndRef.current = handleTouchEnd.bind(null);
+
+    document.addEventListener("touchmove", touchMoveRef.current, {
+      passive: false,
+    });
+    document.addEventListener("touchend", touchEndRef.current);
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    setTouchPoint({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchEnd = (e) => {
+    e.target.style.opacity = 1;
+    document.removeEventListener("touchmove", touchMoveRef.current);
+    document.removeEventListener("touchend", touchEndRef.current);
+
+    if (!touchPoint) return;
+
+    const dropTarget = document.elementFromPoint(touchPoint.x, touchPoint.y);
+    const groupId = dropTarget?.closest("[data-groupid]")?.dataset?.groupid;
+
+    if (groupId && draggedItem) {
+      addGroupItem(Number(groupId), draggedItem);
+      setDraggedItem(null);
+      setTouchPoint(null);
+    }
+  };
+
   const handleOnDrop = (e, groupId) => {
+    e.preventDefault();
     const dataString = e.dataTransfer.getData("application/json");
     const data = JSON.parse(dataString);
     addGroupItem(groupId, data);
@@ -36,7 +80,6 @@ export default function Saved() {
   if (savedLocations?.length <= 0) {
     return (
       <EmptyContentModal
-        onClose={() => setIsEmptyModalOpen(false)}
         title="Saved Locations"
         message="There are no saved locations. Start exploring to find your top destinations."
         buttonText="Explore"
@@ -78,7 +121,8 @@ export default function Saved() {
               <Card
                 key={location.id}
                 location={location}
-                onDragStart={handleOnDrag}
+                onDragStart={(e) => handleOnDrag(e, location)}
+                onTouchStart={(e) => handleTouchStart(e, location)}
               />
             ))}
           </div>

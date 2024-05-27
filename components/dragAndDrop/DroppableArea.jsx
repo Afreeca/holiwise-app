@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import DraggedItem from "./DraggedItem";
 
-const DroppableArea = ({ group, onDrop, onDragOver }) => {
+const DroppableArea = ({ group, onDrop, onDragOver, onTouchEnd }) => {
   const router = useRouter();
   const { removeGroupItem } = useGlobalContext();
   const { id, name, items } = group;
@@ -15,7 +15,13 @@ const DroppableArea = ({ group, onDrop, onDragOver }) => {
   };
 
   return (
-    <div className="mb-2 border-dashed border-2 border-gray-300 p-4 mt-4 bg-gray-100 relative">
+    <div
+      className="mb-2 border-dashed border-2 border-gray-300 p-4 mt-4 bg-gray-100 relative"
+      onDrop={onDrop}
+      onDragOver={onDragOver}
+      onTouchEnd={onTouchEnd}
+      data-groupid={id} // Add data attribute for touch handling
+    >
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-xl font-semibold">{name}</h2>
         <Link
@@ -25,7 +31,7 @@ const DroppableArea = ({ group, onDrop, onDragOver }) => {
           View
         </Link>
       </div>
-      <div onDrop={onDrop} onDragOver={onDragOver}>
+      <div>
         <div className="flex gap-1 items-center text-gray-500 text-center">
           <FontAwesomeIcon icon={faArrowsAlt} className="" size="sm" />
           Drag n drop for voting
