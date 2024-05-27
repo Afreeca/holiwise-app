@@ -1,32 +1,38 @@
 import { useGlobalContext } from "@/context/global";
+import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 import { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import CardBack from "./CardBack";
 import CardFront from "./CardFront";
 
-const Card = ({
-  location,
-  onDragStart,
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
-  small = false,
-}) => {
+const Card = ({ location, small = false }) => {
   const { getSavedLocation, toggleSavedLocation } = useGlobalContext();
   const isSavedLocation = getSavedLocation(location.id);
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: location.id,
+      data: location,
+    });
   const [isFlipped, setIsFlipped] = useState(false);
 
   const toggleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
+  const style = {
+    transform: transform ? CSS.Translate.toString(transform) : undefined,
+    zIndex: isDragging ? 9999 : "auto",
+    position: "relative",
+  };
+
   return (
     <div
-      draggable
-      onDragStart={(e) => onDragStart(e, location)}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="relative transition-transform duration-200 draggable-element touch-action-none"
     >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <CardFront

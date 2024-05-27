@@ -1,31 +1,35 @@
 import { useGlobalContext } from "@/context/global";
+import { useDroppable } from "@dnd-kit/core";
 import { faArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import DraggedItem from "./DraggedItem";
 
-const DroppableArea = ({ group, onDrop, onDragOver, onTouchEnd }) => {
-  const router = useRouter();
+const DroppableArea = ({ group }) => {
+  const { isOver, setNodeRef } = useDroppable({
+    id: group.id,
+  });
+
+  const style = {
+    color: isOver ? "green" : undefined,
+    border: "1px dashed gray",
+    padding: "20px",
+    margin: "10px",
+    minHeight: "100px",
+  };
+
   const { removeGroupItem } = useGlobalContext();
-  const { id, name, items } = group;
 
   const handleRemove = (locationId) => {
-    removeGroupItem(id, locationId);
+    removeGroupItem(group.id, locationId);
   };
 
   return (
-    <div
-      className="mb-2 border-dashed border-2 border-gray-300 p-4 mt-4 bg-gray-100 relative"
-      onDrop={onDrop}
-      onDragOver={onDragOver}
-      onTouchEnd={onTouchEnd}
-      data-groupid={id}
-    >
+    <div ref={setNodeRef} style={style} className="relative bg-gray-100">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-xl font-semibold">{name}</h2>
+        <h2 className="text-xl font-semibold">{group.name}</h2>
         <Link
-          href={`/groups/${id}`}
+          href={`/groups/${group.id}`}
           className="bg-slate-400 text-white px-2 py-1 rounded-md shadow-sm hover:bg-primary hover:text-black transition duration-300 ease-in-out"
         >
           View
@@ -36,9 +40,12 @@ const DroppableArea = ({ group, onDrop, onDragOver, onTouchEnd }) => {
           <FontAwesomeIcon icon={faArrowsAlt} className="" size="sm" />
           Drag n drop for voting
         </div>
-        {items?.map((item, index) => (
+        {group.items?.map((item, index) => (
           <div key={index}>
-            <DraggedItem location={item} onRemove={handleRemove} />
+            <DraggedItem
+              location={item}
+              onRemove={() => handleRemove(item.id)}
+            />
           </div>
         ))}
       </div>

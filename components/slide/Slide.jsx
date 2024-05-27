@@ -14,7 +14,7 @@ const Slide = ({ children }) => {
   };
 
   return (
-    <div className="slide-container border-2 border-gray-300 bg-gray-100 rounded-lg p-4">
+    <div className="slide-container bg-gray-100 rounded-lg p-4">
       <div className="slide-content flex justify-center items-center overflow-hidden">
         {children.length >= 1 && children[currentIndex]}
       </div>

@@ -27,7 +27,7 @@ const CardFront = ({
           {!small && (
             <FontAwesomeIcon
               icon={faBookmark}
-              className={`absolute top-2 right-2 z-10 cursor-pointer ${
+              className={`absolute top-2 right-2 cursor-pointer ${
                 isSavedLocation ? "text-blue-500" : "text-white"
               }`}
               onClick={() => toggleSavedLocation(location)}

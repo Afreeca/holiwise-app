@@ -8,6 +8,7 @@ import LocationCards from "@/components/groups/LocationCards";
 import UserCards from "@/components/groups/UserCards";
 import ConfirmationDialog from "@/components/modal/ConfirmationDialog";
 import { useGlobalContext } from "@/context/global";
+import { DndContext } from "@dnd-kit/core";
 import {
   faExclamationTriangle,
   faInfoCircle,
@@ -18,73 +19,34 @@ import { useState } from "react";
 
 export default function GroupDetails({ params: { groupId } }) {
   const [showModal, setShowModal] = useState(false);
-  const [draggedItem, setDraggedItem] = useState(null);
-  const [touchMovePoint, setTouchMovePoint] = useState(null);
+  const [activeItem, setActiveItem] = useState(null);
   const router = useRouter();
   const { getGroup, updateGroupVoting, setGroups } = useGlobalContext();
   const group = getGroup(Number(groupId));
 
-  const handleOnDrag = (e, username) => {
-    setDraggedItem(username);
-    e.dataTransfer.setData("application/json", JSON.stringify(username));
+  console.log("group; ", group);
+  const handleDragStart = (event) => {
+    setActiveItem(event.active.data.current);
   };
 
-  const handleOnDrop = (e, itemId) => {
-    const dataString = e.dataTransfer.getData("application/json");
-    const username = JSON.parse(dataString);
-
-    const userVote = group.voting[itemId]?.find(
-      (vote) => vote.username === username
-    );
-
-    if (userVote && userVote.votes >= 3) {
-      setShowModal(true);
-      return;
-    }
-
-    updateGroupVoting(group.id, itemId, username);
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleTouchStart = (e, username) => {
-    setDraggedItem(username);
-    setTouchMovePoint(null);
-    e.target.style.opacity = 0.5;
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchMovePoint({ x: e.touches[0].clientX, y: e.touches[0].clientY });
-  };
-
-  const handleTouchEnd = () => {
-    if (touchMovePoint && draggedItem) {
-      const dropTarget = document.elementFromPoint(
-        touchMovePoint.x,
-        touchMovePoint.y
+  const handleDragEnd = (event) => {
+    console.log("handleDragEnd", { item: event });
+    const username = event.active.id;
+    const { over } = event;
+    const itemId = over.id;
+    if (over && over.id) {
+      const userVote = group.voting[itemId]?.find(
+        (vote) => vote.username === username
       );
-      const itemId = dropTarget?.closest("[data-itemid]")?.dataset?.itemid;
 
-      if (itemId) {
-        const dataString = JSON.stringify(draggedItem);
-        const username = JSON.parse(dataString);
-
-        const userVote = group.voting[itemId]?.find(
-          (vote) => vote.username === username
-        );
-
-        if (userVote && userVote.votes >= 3) {
-          setShowModal(true);
-          return;
-        }
-
-        updateGroupVoting(group.id, itemId, username);
+      console.log("userVote: ", { username });
+      if (userVote && userVote.votes >= 3) {
+        setShowModal(true);
+        return;
       }
+
+      updateGroupVoting(group.id, itemId, username);
     }
-    setDraggedItem(null);
-    setTouchMovePoint(null);
   };
 
   const handleRedirect = () => {
@@ -109,43 +71,35 @@ export default function GroupDetails({ params: { groupId } }) {
       <Title text="Group Detail" />
       <div className="flex flex-col flex-1 gap-4 overflow-auto">
         <GroupDetailInfo group={group} />
-        <LocationCards
-          group={group}
-          handleOnDrag={handleOnDrag}
-          handleOnDrop={handleOnDrop}
-          handleDragOver={handleDragOver}
-        />
-        <div className="mt-4">
-          {group?.items.length > 0 && (
-            <>
-              <div className="flex items-center mb-2">
-                <FontAwesomeIcon
-                  icon={faInfoCircle}
-                  className="mr-1 text-blue-500"
-                />
-                <span className="text-gray-700">
-                  You have 3 votes available. Drag and drop the star once or
-                  multiple times on top of the location to vote.
-                </span>
-              </div>
-              <div className="flex items-center text-red-600 mb-2">
-                <FontAwesomeIcon
-                  icon={faExclamationTriangle}
-                  className="mr-1"
-                />
-                <span>You can&apos;t undo your votes.</span>
-              </div>
-            </>
-          )}
-          <UserCards
-            group={group}
-            handleOnDrag={handleOnDrag}
-            handleTouchStart={handleTouchStart}
-            handleTouchMove={handleTouchMove}
-            handleTouchEnd={handleTouchEnd}
-          />
-        </div>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <LocationCards group={group} />
+          <div className="mt-4">
+            {group?.items.length > 0 && (
+              <>
+                <div className="flex items-center mb-2">
+                  <FontAwesomeIcon
+                    icon={faInfoCircle}
+                    className="mr-1 text-blue-500"
+                  />
+                  <span className="text-gray-700">
+                    You have 3 votes available. Drag and drop the star once or
+                    multiple times on top of the location to vote.
+                  </span>
+                </div>
+                <div className="flex items-center text-red-600 mb-2">
+                  <FontAwesomeIcon
+                    icon={faExclamationTriangle}
+                    className="mr-1"
+                  />
+                  <span>You can&apos;t undo your votes.</span>
+                </div>
+              </>
+            )}
+            <UserCards group={group} />
+          </div>
+        </DndContext>
       </div>
+
       <ConfirmationDialog
         isOpen={showModal}
         onClose={() => setShowModal(false)}
