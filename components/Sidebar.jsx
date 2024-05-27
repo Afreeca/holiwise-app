@@ -19,13 +19,12 @@ export default function Sidebar() {
     }
   };
 
-  const width = isOpen
-    ? "flex flex-col w-[140px] bg-white h-screen transition-width duration-300 border border-gray-200"
-    : "flex flex-col w-[80px] bg-white h-screen transition-width duration-300 border border-gray-200";
-
-  console.log("width: ", width);
   return (
-    <div className={width}>
+    <div
+      className={`flex flex-col ${
+        isOpen ? "w-auto" : "w-20"
+      } bg-white h-screen transition-width duration-300 border border-gray-200`}
+    >
       <div
         className={`flex items-center justify-between h-16 p-4 ${
           isOpen && "px-6"
