@@ -18,11 +18,14 @@ import { useState } from "react";
 
 export default function GroupDetails({ params: { groupId } }) {
   const [showModal, setShowModal] = useState(false);
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [touchMovePoint, setTouchMovePoint] = useState(null);
   const router = useRouter();
   const { getGroup, updateGroupVoting, setGroups } = useGlobalContext();
   const group = getGroup(Number(groupId));
 
   const handleOnDrag = (e, username) => {
+    setDraggedItem(username);
     e.dataTransfer.setData("application/json", JSON.stringify(username));
   };
 
@@ -44,6 +47,44 @@ export default function GroupDetails({ params: { groupId } }) {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  const handleTouchStart = (e, username) => {
+    setDraggedItem(username);
+    setTouchMovePoint(null);
+    e.target.style.opacity = 0.5;
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchMovePoint({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+  };
+
+  const handleTouchEnd = () => {
+    if (touchMovePoint && draggedItem) {
+      const dropTarget = document.elementFromPoint(
+        touchMovePoint.x,
+        touchMovePoint.y
+      );
+      const itemId = dropTarget?.closest("[data-itemid]")?.dataset?.itemid;
+
+      if (itemId) {
+        const dataString = JSON.stringify(draggedItem);
+        const username = JSON.parse(dataString);
+
+        const userVote = group.voting[itemId]?.find(
+          (vote) => vote.username === username
+        );
+
+        if (userVote && userVote.votes >= 3) {
+          setShowModal(true);
+          return;
+        }
+
+        updateGroupVoting(group.id, itemId, username);
+      }
+    }
+    setDraggedItem(null);
+    setTouchMovePoint(null);
   };
 
   const handleRedirect = () => {
@@ -96,7 +137,13 @@ export default function GroupDetails({ params: { groupId } }) {
               </div>
             </>
           )}
-          <UserCards group={group} handleOnDrag={handleOnDrag} />
+          <UserCards
+            group={group}
+            handleOnDrag={handleOnDrag}
+            handleTouchStart={handleTouchStart}
+            handleTouchMove={handleTouchMove}
+            handleTouchEnd={handleTouchEnd}
+          />
         </div>
       </div>
       <ConfirmationDialog

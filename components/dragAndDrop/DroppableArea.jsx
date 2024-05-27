@@ -20,7 +20,7 @@ const DroppableArea = ({ group, onDrop, onDragOver, onTouchEnd }) => {
       onDrop={onDrop}
       onDragOver={onDragOver}
       onTouchEnd={onTouchEnd}
-      data-groupid={id} // Add data attribute for touch handling
+      data-groupid={id}
     >
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-xl font-semibold">{name}</h2>

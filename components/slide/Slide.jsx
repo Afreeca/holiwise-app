@@ -14,21 +14,21 @@ const Slide = ({ children }) => {
   };
 
   return (
-    <div className="bg-white border-t border-gray-200">
-      <div className="flex justify-center items-center overflow-hidden">
+    <div className="slide-container border-2 border-gray-300 bg-gray-100 rounded-lg p-4">
+      <div className="slide-content flex justify-center items-center overflow-hidden">
         {children.length >= 1 && children[currentIndex]}
       </div>
       {children.length > 1 && (
-        <div className="flex gap-1 justify-between items-center">
+        <div className="slide-controls flex justify-between items-center mt-4">
           <button
             onClick={prevSlide}
-            className="flex-1 px-4 py-1 bg-gray-200 hover:bg-gray-300 rounded-l-md"
+            className="slide-button flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-l-md"
           >
             Previous
           </button>
           <button
             onClick={nextSlide}
-            className="flex-1 px-4 py-1 bg-gray-200 hover:bg-gray-300 rounded-r-md"
+            className="slide-button flex-1 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-r-md"
           >
             Next
           </button>

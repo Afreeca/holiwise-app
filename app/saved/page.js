@@ -10,15 +10,13 @@ import Slide from "@/components/slide/Slide";
 import { useGlobalContext } from "@/context/global";
 import { savedSectionInfo } from "@/utils/constants";
 import { useRouter } from "next/navigation";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function Saved() {
   const { savedLocations, groups, addGroupItem } = useGlobalContext();
   const router = useRouter();
   const [draggedItem, setDraggedItem] = useState(null);
-  const [touchPoint, setTouchPoint] = useState(null);
-  const touchMoveRef = useRef();
-  const touchEndRef = useRef();
+  const [touchMovePoint, setTouchMovePoint] = useState(null);
 
   const handleRedirect = useCallback(() => {
     router.push(`/`);
@@ -31,39 +29,27 @@ export default function Saved() {
 
   const handleTouchStart = (e, data) => {
     setDraggedItem(data);
-    setTouchPoint({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+    setTouchMovePoint(null);
     e.target.style.opacity = 0.5;
-
-    touchMoveRef.current = handleTouchMove.bind(null);
-    touchEndRef.current = handleTouchEnd.bind(null);
-
-    document.addEventListener("touchmove", touchMoveRef.current, {
-      passive: false,
-    });
-    document.addEventListener("touchend", touchEndRef.current);
   };
 
   const handleTouchMove = (e) => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    setTouchPoint({ x: touch.clientX, y: touch.clientY });
+    setTouchMovePoint({ x: e.touches[0].clientX, y: e.touches[0].clientY });
   };
 
-  const handleTouchEnd = (e) => {
-    e.target.style.opacity = 1;
-    document.removeEventListener("touchmove", touchMoveRef.current);
-    document.removeEventListener("touchend", touchEndRef.current);
-
-    if (!touchPoint) return;
-
-    const dropTarget = document.elementFromPoint(touchPoint.x, touchPoint.y);
-    const groupId = dropTarget?.closest("[data-groupid]")?.dataset?.groupid;
-
-    if (groupId && draggedItem) {
-      addGroupItem(Number(groupId), draggedItem);
-      setDraggedItem(null);
-      setTouchPoint(null);
+  const handleTouchEnd = () => {
+    if (touchMovePoint && draggedItem) {
+      const dropTarget = document.elementFromPoint(
+        touchMovePoint.x,
+        touchMovePoint.y
+      );
+      const groupId = dropTarget?.closest("[data-groupid]")?.dataset?.groupid;
+      if (groupId) {
+        addGroupItem(Number(groupId), draggedItem);
+      }
     }
+    setDraggedItem(null);
+    setTouchMovePoint(null);
   };
 
   const handleOnDrop = (e, groupId) => {
@@ -123,6 +109,8 @@ export default function Saved() {
                 location={location}
                 onDragStart={(e) => handleOnDrag(e, location)}
                 onTouchStart={(e) => handleTouchStart(e, location)}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               />
             ))}
           </div>

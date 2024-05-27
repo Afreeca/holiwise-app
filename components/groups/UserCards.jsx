@@ -1,6 +1,12 @@
 import Star from "@/components/voting/Star";
 
-const UserCards = ({ group, handleOnDrag }) => {
+const UserCards = ({
+  group,
+  handleOnDrag,
+  handleTouchStart,
+  handleTouchMove,
+  handleTouchEnd,
+}) => {
   return (
     <div>
       <h3 className="text-xl font-bold">Users</h3>
@@ -12,7 +18,10 @@ const UserCards = ({ group, handleOnDrag }) => {
               <Star
                 key={starIndex}
                 username={user.name}
-                onDragStart={handleOnDrag}
+                onDragStart={(e) => handleOnDrag(e, user.name)}
+                onTouchStart={(e) => handleTouchStart(e, user.name)}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               />
             ))}
           </div>

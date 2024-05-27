@@ -25,7 +25,8 @@ const LocationCards = ({
         <Slide>
           {group?.items.map((location, index) => (
             <div
-              key={index}
+              data-itemid={location.id}
+              key={location.id}
               className="flex gap-2"
               onDrop={(e) => handleOnDrop(e, location.id)}
               onDragOver={handleDragOver}

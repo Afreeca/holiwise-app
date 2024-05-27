@@ -9,12 +9,22 @@ const GreyStar = () => (
   <FontAwesomeIcon icon={regularStar} style={{ color: "grey" }} />
 );
 
-const Star = ({ username, onDragStart, filled = true }) => {
+const Star = ({
+  username,
+  onDragStart,
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+  filled = true,
+}) => {
   return (
     <p
+      className="cursor-pointer"
       draggable
       onDragStart={(e) => onDragStart(e, username)}
-      className="cursor-pointer"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       {filled ? <GoldenStar /> : <GreyStar />}
     </p>
