@@ -67,7 +67,10 @@ export default function Saved() {
               </div>
             )}
           </div>
-
+          <span className="text-gray-700">
+            Sure, let's plan the trip of a lifetime! Drag and drop your dream
+            location, and let's get ready to vote! 🌍✈️
+          </span>
           <div className="flex-1 overflow-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {savedLocations.map((location) => (

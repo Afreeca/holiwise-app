@@ -38,7 +38,7 @@ const DroppableArea = ({ group }) => {
       <div>
         <div className="flex gap-1 items-center text-gray-500 text-center">
           <FontAwesomeIcon icon={faArrowsAlt} className="" size="sm" />
-          Drag n drop for voting
+          Drag and drop
         </div>
         {group.items?.map((item, index) => (
           <div key={index}>
