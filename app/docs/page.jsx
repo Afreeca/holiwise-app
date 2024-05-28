@@ -17,8 +17,8 @@ const TravelAppDocumentation = () => {
           </h3>
           <p className="mb-2">
             The purpose of this document is to provide a comprehensive overview
-            of the web application designed for a travel agency. It aims to
-            outline the features and functionalities currently implemented,
+            of the web application designed for organising a group trip. It aims
+            to outline the features and functionalities currently implemented,
             identify existing limitations and areas for improvement, and propose
             potential enhancements.
           </p>
