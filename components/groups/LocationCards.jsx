@@ -2,7 +2,7 @@ import Card from "@/components/card/card";
 import DroppableItem from "@/components/dragAndDrop/DroppableItem";
 import EmptyContent from "@/components/empty/EmptyContent";
 import Slide from "../slide/Slide";
-import Star from "../voting/Star";
+import StarVoted from "../voting/StarVoted";
 
 const LocationCards = ({ group }) => {
   if (group?.items.length <= 0) {
@@ -20,37 +20,35 @@ const LocationCards = ({ group }) => {
       <div className="flex flex-row flex-wrap gap-16">
         <Slide>
           {group?.items.map((location, index) => (
-            <DroppableItem key={location.id} id={location.id}>
-              <div
-                data-itemid={location.id}
+            <div
+              data-itemid={location.id}
+              key={location.id}
+              className="flex gap-2"
+            >
+              <DroppableItem
                 key={location.id}
-                className="flex gap-2"
+                id={location.id}
+                name={location.name}
               >
                 <Card key={index} location={location} small />
-                <div className="h-16">
-                  {group.voting[location.id]?.map((vote) => (
-                    <div key={vote.username}>
-                      <span>{vote.username}</span>
-                      <div className="flex">
-                        {vote.votes <= 0 ? (
-                          <Star
-                            key={vote.username}
-                            username={vote.username}
-                            filled={false}
-                          />
-                        ) : (
-                          Array.from({ length: vote.votes }).map(
-                            (_, starIndex) => (
-                              <Star key={starIndex} username={vote.username} />
-                            )
-                          )
-                        )}
-                      </div>
+              </DroppableItem>
+              <div className="h-16">
+                {group.voting[location.id]?.map((vote, index) => (
+                  <div key={vote.username}>
+                    <span>{vote.username}</span>
+                    <div className="flex">
+                      {vote.votes <= 0 ? (
+                        <StarVoted key={vote.name} filled={false} />
+                      ) : (
+                        Array.from({ length: vote.votes }).map(
+                          (_, starIndex) => <StarVoted key={starIndex} />
+                        )
+                      )}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-            </DroppableItem>
+            </div>
           ))}
         </Slide>
       </div>

@@ -24,22 +24,19 @@ export default function GroupDetails({ params: { groupId } }) {
   const { getGroup, updateGroupVoting, setGroups } = useGlobalContext();
   const group = getGroup(Number(groupId));
 
-  console.log("group; ", group);
   const handleDragStart = (event) => {
     setActiveItem(event.active.data.current);
   };
 
   const handleDragEnd = (event) => {
-    console.log("handleDragEnd", { item: event });
     const username = event.active.id;
     const { over } = event;
-    const itemId = over.id;
     if (over && over.id) {
+      const itemId = over.id;
       const userVote = group.voting[itemId]?.find(
         (vote) => vote.username === username
       );
 
-      console.log("userVote: ", { username });
       if (userVote && userVote.votes >= 3) {
         setShowModal(true);
         return;
@@ -47,6 +44,7 @@ export default function GroupDetails({ params: { groupId } }) {
 
       updateGroupVoting(group.id, itemId, username);
     }
+    setActiveItem(null);
   };
 
   const handleRedirect = () => {
