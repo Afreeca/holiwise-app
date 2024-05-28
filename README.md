@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Holiwise interview exercice
 
-## Getting Started
+## Title:
 
-First, run the development server:
+Group trip
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Project Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Organise a group trip with your friends
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Product assumptions
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Folders are essentially groups and are used interchangeably throughout the application.
+- The decision was made to not implement any storage solution or in-memory data persistence as the use-case does not need one. Therefore, data is not retained between refresh or sessions.
+- It is assumed that users already have some friends registered in the application, making it easier for prototyping the process of adding users to groups and voting.
+- A user can:
+  - create multiple groups/folders
+  - add multiple locations for voting
+  - vote for other users, so we can visualise multiple votes on a location
 
-## Learn More
+### Project directory structure
 
-To learn more about Next.js, take a look at the following resources:
+    ├── mock/ # all mocked data
+    ├── app/
+    ├── server/ # Server-side code
+    │ ├── docs/ # hidden route for documentation about the exercise
+    | ├── groups/ # group page
+    | ├── saved # saved location page
+    | ├── global.css # global styles
+    | ├── layout.js # global shared layout
+    | └── page.js # main page(home)
+    ├── components/.js # folder for all shared components
+    ├── context.js # shared state context
+    | └── ... global # global state
+    | └── ... useSidebar # sidebar state
+    ├── public/ # Public assets
+    ├── utils/ # utils functions and constants
+    ├── gitignore # git ignored files
+    ├── package.json # Frontend dependencies and scripts
+    ├── README.md # Project documentation
+    ├── tailwind.json # tailwind style configurations
+    └── typescript.json # typeccript style configurations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Languages and Tools
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/>
+<a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/>
+<a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> <a href="https://nextjs.org" target="_blank" rel="noreferrer"> <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbranditechture.agency%2Fbrand-logos%2Fwp-content%2Fuploads%2Fwpdm-cache%2FNext.js-900x0.png" alt="tailwind" width="60" height="40"/> </a>
 
-## Deploy on Vercel
+## Requirements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Follow the instructions provided in the official documentation for your OS
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Nodejs and npm -> https://nodejs.org/en/download/
+
+## How to run the application
+
+#### Run it Manually
+
+To run the application manually, you need Node.js and npm installed. Follow these steps:
+
+1. Start the backend server:
+
+   1. from the root folder (holiwise-app): install dependencies
+      ```bash
+      npm install
+      ```
+   2. run the server
+      ```bash
+      npm run dev
+      ```
+
+### Access the UI Application
+
+Once the application is running, you can access the UI by opening [http://localhost:3000](http://localhost:3000) in your browser
+
+### Port Conflict
+
+If you encounter port conflicts, it might be due to other applications using the same ports. Before running the application, ensure that ports 3000 is available. If not, you can modify the application port
+
+### Run Unit tests (Jest)
+
+They are no unit tests
+
+### Run Unit tests (Jest)
+
+There are many different aspects to improve in the code base. - better folder structure - variable and function naming - some clean up - simplification and decoupling of bigger or complex components
+
+## Author
+
+### `Adilson Mendes`
