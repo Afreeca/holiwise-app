@@ -54,7 +54,7 @@ const TravelAppDocumentation = () => {
                   <li>create multiple groups/folders</li>
                   <li>add multiple locations for voting</li>
                   <li>
-                    vote for other users, so we can visualize multiple votes on
+                    vote for other users, so we can visualise multiple votes on
                     a location
                   </li>
                 </ul>
@@ -79,7 +79,7 @@ const TravelAppDocumentation = () => {
             Save Locations
           </h3>
           <p className="mb-2">
-            Description: Users can save their favorite locations for future
+            Description: Users can save their favourite locations for future
             reference.
           </p>
           <h3 className="text-xl font-semibold text-gray-700 mb-1">
@@ -125,15 +125,15 @@ const TravelAppDocumentation = () => {
           <p className="mb-2">
             Improvement Suggestion: Enhance the drag and drop feature for better
             mobile compatibility. Honestly I wouldn&apos;t use drag and drop for
-            mobile. I do not beleive it offers a great user experience. maybe
-            just adding a clikc event or menu allowing the users to add location
+            mobile. I do not believe it offers a great user experience. maybe
+            just adding a click event or menu allowing the users to add location
             to groups
           </p>
           <h3 className="text-xl font-semibold text-gray-700 mb-1">
             Design Decisions
           </h3>
           <p className="mb-2">
-            Some design decisions are not optimized for mobile, such as drag and
+            Some design decisions are not optimised for mobile, such as drag and
             drop functionality, icon sizes, text sizes and even some layouts and
             processes like voting.
           </p>
@@ -146,7 +146,7 @@ const TravelAppDocumentation = () => {
           </h3>
           <p className="mb-2">
             replace drag and drop for a different method to a better and more
-            optimize experience mobile devices.
+            optimised experience mobile devices.
           </p>
 
           <h3 className="text-xl font-semibold text-gray-700 mb-1">
@@ -168,7 +168,7 @@ const TravelAppDocumentation = () => {
           <p className="mb-2">
             A more robust and real voting functionality requires user
             registration and login. and more important when adding users to the
-            groups, this should be an asyncronous invitation that has to be
+            groups, this should be an asynchronous invitation that has to be
             accepted by the user and with a proper process to notify the user
           </p>
 
@@ -235,8 +235,8 @@ const TravelAppDocumentation = () => {
             Group Management
           </h3>
           <p className="mb-2">
-            Ensure only authenticated and authorized users can add/remove
-            members from groups and, vote
+            Ensure only authenticated and authorised users can add/remove
+            members from groups and vote.
           </p>
         </section>
 
@@ -245,8 +245,8 @@ const TravelAppDocumentation = () => {
             7. Future Enhancements
           </h2>
           <p className="mb-2">
-            If I had more time were available, the following improvements could
-            be made:
+            If I had more time available, the following improvements could be
+            made:
           </p>
           <ul className="list-disc ml-6">
             <li>
@@ -254,17 +254,17 @@ const TravelAppDocumentation = () => {
               user experience.
             </li>
             <li>
-              Implement user authentication for secure access and personalized
-              features. ex: with users we could capture user location and
-              personalise some informations like: average flight cost would be
-              different for each user
+              Implement user authentication for secure access and personalised
+              features. e.g. with users, we could capture user location and
+              personalise some information like: average flight cost would be
+              different for each user.
             </li>
             <li>
               Implement a simple &quot;non-real time&quot; notification system
-              to inform users about group invitations and voting updates. and
-              later on a real time one
+              to inform users about group invitations and voting updates, and
+              later on a real-time one.
             </li>
-            <li>Add advanced group/folder management features</li>
+            <li>Add advanced group/folder management features.</li>
             <li>
               Explore alternative drag-and-drop solutions for better mobile
               compatibility.
@@ -283,36 +283,36 @@ const TravelAppDocumentation = () => {
           <p className="mb-2 font-semibold">Group feature</p>
           <p>
             In my opinion, this feature is one of the most important aspects of
-            the travel process. Group traveling entails numerous edge cases and
-            considerations, ranging from organizing bachelorette parties to
+            the travel process. Group travelling entails numerous edge cases and
+            considerations, ranging from organising bachelorette parties to
             simple boys or girls trips.
           </p>
           <ul className="list-disc list-inside mb-2">
             <li>
               Features I would like to see as a user and someone who loves to
-              organize group trips include:
+              organise group trips include:
               <ul className="list-disc list-inside">
                 <li>Groups management</li>
                 <li>
-                  User location integration, so we can personalize key
+                  User location integration, so we can personalise key
                   information like flight cost or the best country to meet up in
-                  case members live in different countries
+                  case members live in different countries.
                 </li>
                 <li>
                   Ability to add your budget, aiding other members in
-                  decision-making and understanding your decisions
+                  decision-making and understanding your decisions.
                 </li>
                 <li>
                   Monzo or Revolut integration to record country expenses,
-                  providing valuable insights into expenditure
+                  providing valuable insights into expenditure.
                 </li>
                 <li>
                   Keeping a history of previous group trips for future reference
-                  or for creating content such as blogs
+                  or for creating content such as blogs.
                 </li>
                 <li>
                   Potential for additional features such as charging users for
-                  storing videos and images about the trip
+                  storing videos and images about the trip.
                 </li>
               </ul>
             </li>
