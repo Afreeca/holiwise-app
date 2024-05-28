@@ -28,10 +28,42 @@ const TravelAppDocumentation = () => {
             limitations.
           </p>
         </section>
+        <section className="mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            2. Assumptions
+          </h2>
+          <ul className="list-disc ml-6">
+            <li>
+              Folders are essentially groups and are used interchangeably
+              throughout the application.
+            </li>
+            <li>
+              The decision was made to not implement any storage solution or
+              in-memory data persistence as the use-case does not need one.
+              Therefore, data is not retained between refresh or sessions.
+            </li>
+            <li>
+              It is assumed that users already have some friends registered in
+              the application, making it easier for prototyping the process of
+              adding users to groups and voting.
+            </li>
+            <li>
+              A user can:
+              <li className="ml-4">create multiple groups/folders</li>
+              <li className="ml-4">add multiple locations for voting</li>
+              <li className="ml-4">
+                vote for other users, so we can visualise multiple votes on a
+                location
+              </li>
+            </li>
+
+            {/* Add more assumptions as needed */}
+          </ul>
+        </section>
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            2. Features and Functionalities
+            3. Features and Functionalities
           </h2>
           <h3 className="text-xl font-semibold text-gray-700 mb-1">
             View All Locations
@@ -70,7 +102,7 @@ const TravelAppDocumentation = () => {
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            3. Current Limitations and Areas for Improvement
+            4. Current Limitations and Areas for Improvement
           </h2>
           <h3 className="text-xl font-semibold text-gray-700 mb-1">
             Drag and Drop Functionality
@@ -205,7 +237,43 @@ const TravelAppDocumentation = () => {
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            7. Conclusion
+            7. Future Enhancements
+          </h2>
+          <p className="mb-2">
+            If I had more time were available, the following improvements could
+            be made:
+          </p>
+          <ul className="list-disc ml-6">
+            <li>
+              Improve overall desktop and mobile responsiveness for smoother
+              user experience.
+            </li>
+            <li>
+              Implement user authentication for secure access and personalized
+              features. ex: with users we could capture user location and
+              personalise some informations like: average flight cost would be
+              different for each user
+            </li>
+            <li>
+              Implement a simple "non-real time" notification system to inform
+              users about group invitations and voting updates. and later on a
+              real time one
+            </li>
+            <li>Add advanced group/folder management features</li>
+            <li>
+              Explore alternative drag-and-drop solutions for better mobile
+              compatibility.
+            </li>
+            <li>
+              Add component tests and usability testing to get more feedback and
+              improve the user experience and interface.
+            </li>
+          </ul>
+        </section>
+
+        <section className="mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            8. Conclusion
           </h2>
           <p className="mb-2">Summarize the key points of the document.</p>
           <p className="mb-2">
@@ -216,7 +284,7 @@ const TravelAppDocumentation = () => {
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            8. Author
+            9. Author
           </h2>
           <h2 className="text-xl font-semibold text-gray-700 mb-1">
             Adilson Mendes
