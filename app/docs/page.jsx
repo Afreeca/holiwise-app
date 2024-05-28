@@ -280,10 +280,46 @@ const TravelAppDocumentation = () => {
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
             8. Conclusion
           </h2>
-          <p className="mb-2">Summarize the key points of the document.</p>
-          <p className="mb-2">
-            Reiterate the importance of addressing the identified issues and
-            improvements for better user experience and security.
+          <p className="mb-2 font-semibold">Group feature</p>
+          <p>
+            In my opinion, this feature is one of the most important aspects of
+            the travel process. Group traveling entails numerous edge cases and
+            considerations, ranging from organizing bachelorette parties to
+            simple boys or girls trips.
+          </p>
+          <ul className="list-disc list-inside mb-2">
+            <li>
+              Features I would like to see as a user and someone who loves to
+              organize group trips include:
+              <ul className="list-disc list-inside">
+                <li>Groups management</li>
+                <li>
+                  User location integration, so we can personalize key
+                  information like flight cost or the best country to meet up in
+                  case members live in different countries
+                </li>
+                <li>
+                  Ability to add your budget, aiding other members in
+                  decision-making and understanding your decisions
+                </li>
+                <li>
+                  Monzo or Revolut integration to record country expenses,
+                  providing valuable insights into expenditure
+                </li>
+                <li>
+                  Keeping a history of previous group trips for future reference
+                  or for creating content such as blogs
+                </li>
+                <li>
+                  Potential for additional features such as charging users for
+                  storing videos and images about the trip
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            The objective is to create a single place where users can manage and
+            share everything related to their group travel experiences.
           </p>
         </section>
 
