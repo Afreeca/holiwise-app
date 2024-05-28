@@ -1,4 +1,4 @@
-# Holiwise interview exercice
+# Holiwise interview exercise
 
 ## Title:
 
@@ -31,7 +31,7 @@ Organise a group trip with your friends
     | └── page.js # main page(home)
     ├── components/.js # folder for all shared components
     ├── context.js # shared state context
-    | └── ... global # global state
+    | ├── ... global # global state
     | └── ... useSidebar # sidebar state
     ├── public/ # Public assets
     ├── utils/ # utils functions and constants
