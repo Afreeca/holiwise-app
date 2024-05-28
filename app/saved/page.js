@@ -74,7 +74,7 @@ export default function Saved() {
           <div className="flex-1 overflow-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {savedLocations.map((location) => (
-                <Card key={location.id} location={location} />
+                <Card key={location.id} location={location} draggable />
               ))}
             </div>
           </div>

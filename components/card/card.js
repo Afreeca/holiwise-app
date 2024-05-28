@@ -6,7 +6,7 @@ import ReactCardFlip from "react-card-flip";
 import CardBack from "./CardBack";
 import CardFront from "./CardFront";
 
-const Card = ({ location, small = false }) => {
+const Card = ({ location, small = false, draggable = false }) => {
   const { getSavedLocation, toggleSavedLocation } = useGlobalContext();
   const isSavedLocation = getSavedLocation(location.id);
   const { attributes, listeners, setNodeRef, transform, isDragging } =
@@ -32,7 +32,9 @@ const Card = ({ location, small = false }) => {
       style={style}
       {...listeners}
       {...attributes}
-      className="relative transition-transform duration-200 draggable-element touch-action-none"
+      className={`relative transition-transform duration-200 draggable-element touch-action-none ${
+        draggable && "cursor-grab active:cursor-grabbing"
+      } `}
     >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
         <CardFront

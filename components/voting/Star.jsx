@@ -29,7 +29,7 @@ const Star = ({ username, filled = true }) => {
       style={style}
       {...listeners}
       {...attributes}
-      className="cursor-pointer draggable-element touch-action-none"
+      className="cursor-grab active:cursor-grabbing draggable-element touch-action-none"
     >
       {filled ? <GoldenStar /> : <GreyStar />}
     </p>
