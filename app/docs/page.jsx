@@ -47,15 +47,19 @@ const TravelAppDocumentation = () => {
               the application, making it easier for prototyping the process of
               adding users to groups and voting.
             </li>
-            <li>
-              A user can:
-              <li className="ml-4">create multiple groups/folders</li>
-              <li className="ml-4">add multiple locations for voting</li>
-              <li className="ml-4">
-                vote for other users, so we can visualise multiple votes on a
-                location
+            <ul>
+              <li className="list-disc">
+                A user can:
+                <ul className="ml-8 list-disc">
+                  <li>create multiple groups/folders</li>
+                  <li>add multiple locations for voting</li>
+                  <li>
+                    vote for other users, so we can visualize multiple votes on
+                    a location
+                  </li>
+                </ul>
               </li>
-            </li>
+            </ul>
 
             {/* Add more assumptions as needed */}
           </ul>
@@ -167,6 +171,7 @@ const TravelAppDocumentation = () => {
             groups, this should be an asyncronous invitation that has to be
             accepted by the user and with a proper process to notify the user
           </p>
+
           <p className="mb-2">
             Improvement Suggestion: Implement a registration and login system to
             allow users to vote properly.
@@ -255,9 +260,9 @@ const TravelAppDocumentation = () => {
               different for each user
             </li>
             <li>
-              Implement a simple "non-real time" notification system to inform
-              users about group invitations and voting updates. and later on a
-              real time one
+              Implement a simple &quot;non-real time&quot; notification system
+              to inform users about group invitations and voting updates. and
+              later on a real time one
             </li>
             <li>Add advanced group/folder management features</li>
             <li>
