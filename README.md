@@ -22,7 +22,6 @@ Organise a group trip with your friends
 
     ├── mock/ # all mocked data
     ├── app/
-    ├── server/ # Server-side code
     │ ├── docs/ # hidden route for documentation about the exercise
     | ├── groups/ # group page
     | ├── saved # saved location page
