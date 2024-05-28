@@ -88,7 +88,7 @@ const TravelAppDocumentation = () => {
           </p>
           <p className="mb-2">
             Improvement Suggestion: Enhance the drag and drop feature for better
-            mobile compatibility. Honestly I wouldn't use drag and drop for
+            mobile compatibility. Honestly I wouldn&apos;t use drag and drop for
             mobile. I do not beleive it offers a great user experience. maybe
             just adding a clikc event or menu allowing the users to add location
             to groups
